@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 	<div v-for="post in listPost":key="post.id"  > 
-		<h3>{{ post.first_name }}</h3>
+		<a href='#' @click="goTo(post.id)" ><h3>{{ post.first_name }}</h3></a>
 		<img :src="post.avatar" class="img-fluid" >
 		<p> Email :{{ post.email }} </p>
 		
@@ -35,7 +35,11 @@
 	this.page = this.allData.page
 	this.totalPage = this.allData.total_pages
 	console.log(this.allData)
-      }
+     },
+
+     goTo(id) {
+	this.$router.push({ name : "user" , params : {id:id}})
+     }
     }
   }
 </script>

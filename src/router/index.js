@@ -10,6 +10,14 @@ const routes = [
     name: 'Home',
     component: Home
   },
+	
+  {
+    path: '/:id',
+    name: 'user',
+    component: () => import('../views/Detail.vue'),
+    props: true
+
+  },
   {
     path: '/about',
     name: 'About',
@@ -21,6 +29,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',	
   routes
 })
 
