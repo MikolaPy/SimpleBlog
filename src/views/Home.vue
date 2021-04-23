@@ -1,18 +1,41 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<div v-for="post in listPost":key="post.id"  > 
+		<h3>{{ post.first_name }}</h3>
+		<img :src="post.avatar" class="img-fluid" >
+		<p> Email :{{ post.email }} </p>
+		
+		<hr>
+	</div>
+	<h3> Page :{{ page }} of {{ totalPage }}   </h3>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  export default {
+    name: 'Home',
+    data() {
+	return {
+	  allData: {},
+	  page:1, 
+	  totalPage:1, 
+	  listPost: {}, 
+	}
+    },
+    components: {},
+    created() {
+	this.LoadListPost()
+    },
+    methods: {
+      async LoadListPost() {
+	this.allData = await fetch(
+	  `${this.$store.getters.getServerUrl}/users/`
+	).then(response => response.json());
+	this.listPost = this.allData.data;
+	this.page = this.allData.page
+	this.totalPage = this.allData.total_pages
+	console.log(this.allData)
+      }
+    }
   }
-}
 </script>
