@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store( {
   state: {
-	  backendUrl: "https://reqres.in/api"
+	  backendUrl: "https://jsonplaceholder.typicode.com"
   },
   mutations: {},
   actions: {},
