@@ -1,8 +1,8 @@
-		<!--<a href='#' @click="goTo(post.id)" ><h3>{{ post.title }}</h3></a><p> {{ post.body }} -->
 <template>
   <div class="home">
-    <h1 class="text-center">POSTS</h1>
     <div class="album py-5 bg-light">
+    <input v-model="search" class="form-control" placeholder="Filter by title body">
+    <h1 class="text-center">ALL POSTS</h1>
         <div class="container" v-cloak>
             <div class="row">
                 <div class="col-md-4" v-for="post in displayedPosts">
@@ -13,7 +13,7 @@
                             <p class="card-text"> {{post.body}} </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" @click="goTo(post.id)" class="btn btn-sm btn-outline-secondary">View</button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                 </div>
                             </div>
@@ -40,6 +40,7 @@
         pages : [],
         page : 1,
         perPage : 12,
+        search : "",
 	  };
     },
     components: {},
@@ -61,13 +62,12 @@
           this.pages.push(index);
         }
       },
-      paginate(listPost){
+      paginate(posts){
         let page = this.page;
         let perPage = this.perPage;
         let from = (page * perPage) - perPage;
         let to =  (page * perPage) ;
-        console.log((this.listPost).slice(from,to));
-        return listPost.slice(from,to)
+        return posts.slice(from,to)
       },
     },
     watch: {
@@ -77,7 +77,11 @@
     },
     computed: {
       displayedPosts(){
-        return this.paginate(this.listPost)
+        let search = this.search.toLowerCase();
+        let filtered_post = this.listPost.filter(obj =>
+        (obj.title.toLowerCase().indexOf(search) != -1) ||
+        (obj.body.toLowerCase().indexOf(search) != -1))
+        return this.paginate(filtered_post)
       }
     }
   }
