@@ -1,10 +1,18 @@
 <template>
-<nav class ="navbar navbar-ligth" style="background-color: #e3f2fd;">
-      <a class="navbar-brand" href="/"><span style="color:red">SImple</span>Post</a>
+<nav >
+<div class="navbar navbar-dark bg-dark box-shadow">
+    <div class="container d-flex justify-content-between">
+        <a href="/" class="navbar-brand d-flex align-items-center">
+        <strong>SimpleBlog</strong></a>
+        <a href="/create" class="navbar-brand d-flex align-items-rigth">
+        <strong>create post</strong></a>
+    </div>
+</div>
+
 </nav>
 </template>
 <script>
-	export default {
-		name: "Nav"
-	}
+    export default {
+        name: "Nav"
+    }
 </script>
