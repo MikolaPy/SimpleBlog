@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-        <form @submit.prevent="CreatePost">
+        <form @submit.prevent="EditPost">
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" id="title" v-model="title" class="form-control">
@@ -17,26 +17,35 @@
 </template>
 <script>
 
-
 export default {
-  name: 'CreatePost',
+  name: 'post',
+  props: {
+    id: Number                      //simple validation
+  },
   data() {
     return {
 	  title:"",
       body:"",
       user:1,
+	  post: {},
     }
   },
+  created() {
+    this.loadPost()
+  },
   methods: {
-    async loadUser() {
+    async loadPost() {
 	  this.post = await fetch(
 	  `${this.$store.getters.getServerUrl}/posts/${this.id}`
 	  ).then(response => response.json());
+      this.title = this.post.title;
+      this.body = this.post.body;
     },
-    async CreatePost() {
-      await fetch(`${this.$store.getters.getServerUrl}/posts/`,{
-        method: 'POST',
+    async EditPost(){
+      await fetch(`${this.$store.getters.getServerUrl}/posts/${this.id}`, {
+        method: 'PUT',
         body: JSON.stringify({
+          id: this.id,
           title: this.title ,
           body: this.body,
           userId: this.user ,
@@ -48,9 +57,7 @@ export default {
       .then((response) => response.json())
       .then((json) => console.log(json));
     }
-  },
+  }
 }
-
-
 </script>
 

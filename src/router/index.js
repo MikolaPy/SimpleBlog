@@ -20,7 +20,12 @@ const routes = [
     name: 'Detail',
     component: () => import('../views/Detail.vue'),
     props: true
-
+  },
+  {
+    path: '/:id/edit',
+    name: 'EditPost',
+    component: () => import('../views/EditPost.vue'),
+    props: true
   },
 ]
 

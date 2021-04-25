@@ -12,8 +12,8 @@
                             <p class="card-text">{{post.body.slice(0,97)}}...</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" @click="goTo(post.id)" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <button type="button" @click="goToDetail(post.id)" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" @click="goToEdit(post.id)" class="btn btn-sm btn-outline-secondary">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -51,8 +51,11 @@
 	    `${this.$store.getters.getServerUrl}/posts/`
 	    ).then(response => response.json());
       },
-      goTo(id) {
+      goToDetail(id) {
 	    this.$router.push({ name : "Detail" , params : {id:id}})
+      },
+      goToEdit(id) {
+	    this.$router.push({ name : "EditPost" , params : {id:id}})
       },
       setPages () {
         let numberOfPages = Math.ceil(this.listPost.length / this.perPage);
