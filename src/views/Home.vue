@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <div class="album py-5 bg-light">
-        <input v-model="search" class="form-control" placeholder="Filter by title body">
+        <input v-model="search" class="form-control" placeholder="Filter by title and body">
         <h1 class="text-center">ALL POSTS</h1>
         <div class="container" v-cloak>
             <div class="row">
@@ -10,7 +9,7 @@
                         <div class="card-body">
                             <h5 class="capitalize">{{post.title}}</h5>
 
-                            <p class="card-text"> {{post.body}} </p>
+                            <p class="card-text">{{post.body.slice(0,97)}}...</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" @click="goTo(post.id)" class="btn btn-sm btn-outline-secondary">View</button>
@@ -28,7 +27,6 @@
                 <button type="button" @click="page++" v-if="page < pages.length" class="btn btn-sm btn-outline-secondary"> >> </button>
             </div>
         </div>
-    </div>
   </div>
 </template>
 <script>

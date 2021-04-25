@@ -1,5 +1,4 @@
 <template>
-<div class="album py-5 bg-light">
 <div class="container">
 
 <h3> {{ post.title }} </h3>
@@ -9,11 +8,12 @@
 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
 <hr>
 
-<h4>Comments( {{ comments.length }} )</h4>
-<div class="media mb40">
-    <div v-for="comment in comments" class="media-body">
-        <h5 class="mt-0 font400 clearfix">{{ comment.name }}</h5>
-        <p> {{ comment.body }} </p>
+<h4 style="padding:15px">Comments( {{ comments.length }} )</h4>
+<div class="center-block">
+    <div style="margin:30px" v-for="comment in comments" >
+        <hr>
+        <h5 class="mt-0 font400 clearfix"><small>{{ comment.name }}</small></h5>
+        <p>{{ comment.body }}</p>
     </div>
 </div>
 <hr class="mb40">
@@ -29,7 +29,6 @@
             <button @click="newComment" type="button" class="btn btn-primary">Create</button>
         </form>
         <button type="button" v-show="!isVisableForm" @click="isVisableForm=!isVisableForm" class="btn btn-primary">New comment</button>
-    </div>
 </div>
 </template>
 <script>
@@ -37,7 +36,9 @@
 
 export default {
   name: 'post',
-  props: ['id'],
+  props: {
+    id: Number                      //simple validation
+  },
   data() {
     return {
 	  post: {},

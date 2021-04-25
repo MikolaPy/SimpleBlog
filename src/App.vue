@@ -1,11 +1,9 @@
 <template>
   <div id="app">
     <Nav />
-	<main>
-	    <div class="container">
-		<router-view/>
+        <div class="container album py-5 bg-light">
+            <router-view/>
 	    </div>
-	</main>
   </div>
 </template>
 
