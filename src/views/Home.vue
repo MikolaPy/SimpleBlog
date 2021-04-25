@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="album py-5 bg-light">
-    <input v-model="search" class="form-control" placeholder="Filter by title body">
-    <h1 class="text-center">ALL POSTS</h1>
+        <input v-model="search" class="form-control" placeholder="Filter by title body">
+        <h1 class="text-center">ALL POSTS</h1>
         <div class="container" v-cloak>
             <div class="row">
                 <div class="col-md-4" v-for="post in displayedPosts">
@@ -54,7 +54,7 @@
 	    ).then(response => response.json());
       },
       goTo(id) {
-	    this.$router.push({ name : "user" , params : {id:id}})
+	    this.$router.push({ name : "Detail" , params : {id:id}})
       },
       setPages () {
         let numberOfPages = Math.ceil(this.listPost.length / this.perPage);

@@ -1,5 +1,4 @@
 <template>
-<nav >
 <div class="navbar navbar-dark bg-dark box-shadow">
     <div class="container d-flex justify-content-between">
         <a href="/" class="navbar-brand d-flex align-items-center">
@@ -8,8 +7,6 @@
         <strong>create post</strong></a>
     </div>
 </div>
-
-</nav>
 </template>
 <script>
     export default {
