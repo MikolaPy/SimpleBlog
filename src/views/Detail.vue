@@ -7,6 +7,9 @@
 
 <p class="lead"> {{ post.body }} </p>
 
+<button type="button" @click="goTo(post.id)" class="btn btn-sm btn-outline-secondary">
+        Delete</button>
+<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
 <hr class="mb40">
 <h4>Comments( {{ comments.length }} )</h4>
 <div class="media mb40">
@@ -18,8 +21,7 @@
 
 
 <hr class="mb40">
-<h4 class="mb40 text-uppercase font500">Post a comment</h4>
-<form role="form">
+<form v-show="isVisableForm" role="form">
 <div class="form-group">
 <label>Name</label>
 <input type="text" class="form-control">
@@ -29,9 +31,11 @@
 <textarea class="form-control" rows="5"></textarea>
 </div>
 <div class="clearfix float-right">
-<button type="button" class="btn btn-primary btn-lg">Create</button>
+<button @click="newComment" type="button" class="btn btn-primary">Create</button>
 </div>
 </form>
+<button type="button" v-show="!isVisableForm"
+@click="isVisableForm=!isVisableForm" class="btn btn-primary">New comment</button>
 </div>
 </div>
 </template>
@@ -42,8 +46,9 @@ export default {
   props: ['id'],
   data() {
     return {
-	  post : {},
-      comments : {},
+	  post: {},
+      isVisableForm: false,
+      comments: {},
     }
   },
   components: {},
@@ -60,6 +65,9 @@ export default {
 	  `${this.$store.getters.getServerUrl}/posts/${this.id}/comments`
 	  ).then(response => response.json());
 
+    },
+    newComment(){
+      this.isVisableForm = !this.isVisableForm;
     }
   }
 }
