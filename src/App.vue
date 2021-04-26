@@ -11,6 +11,7 @@
 </style>
 <script>
 	import Nav from "./components/Nav";
+    // Navbar 
 	export default {
 		components: {Nav}
 	}

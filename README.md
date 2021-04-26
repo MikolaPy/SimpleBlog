@@ -1,19 +1,9 @@
-# blog
+ Answer to task.
 
-## Project setup
-```
-npm install
-```
+The site uses api https://jsonplaceholder.typicode.com/.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Abilities:
+  View posts for 10 elements;
+  Filtering by header and body;
+  Viewing a single post and comments on it;
+  Delete, create, edit the post;
