@@ -21,6 +21,8 @@
 export default {
   name: 'CreatePost',
   data() {
+  // title and body related to the form
+  // user default 
     return {
 	  title:"",
       body:"",
@@ -28,11 +30,7 @@ export default {
     }
   },
   methods: {
-    async loadUser() {
-	  this.post = await fetch(
-	  `${this.$store.getters.getServerUrl}/posts/${this.id}`
-	  ).then(response => response.json());
-    },
+  // create and redirect home
     async CreatePost() {
       await fetch(`${this.$store.getters.getServerUrl}/posts/`,{
         method: 'POST',
@@ -45,8 +43,7 @@ export default {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
+      .then( () => this.$router.push({ name : "Home" }));
     }
   },
 }

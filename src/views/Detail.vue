@@ -2,7 +2,7 @@
 <div class="container">
     <h3> {{ post.title }} </h3>
     <p class="lead"> {{ post.body }} </p>
-    <button type="button" @click="goTo(post.id)" class="btn btn-sm btn-outline-secondary">
+    <button type="button" @click="deletePost" class="btn btn-sm btn-outline-secondary">
         Delete</button>
     <button type="button" @click="goToEdit(post.id)" class="btn btn-sm btn-outline-secondary">Edit</button>
     <hr>
@@ -31,41 +31,45 @@
 </div>
 </template>
 <script>
-
-
 export default {
   name: 'post',
   props: {
-    id: Number                      //simple validation
+    id: Number                              //from "Home post.id" 
   },
   data() {
     return {
+	  post: {},
+      comments: {},
       commentName:"",
       commentBody:"",
-	  post: {},
-      isVisableForm: false,
-      comments: {},
+      isVisableForm: false,                 //visible form 
     }
   },
   components: {},
   created() {
-    this.loadUser()
+    this.loadPost()
   },
   methods: {
-    async loadUser() {
+    async loadPost() {                      //load post and comments
 	  this.post = await fetch(
 	  `${this.$store.getters.getServerUrl}/posts/${this.id}`
 	  ).then(response => response.json());
-
       this.comments = await fetch(
 	  `${this.$store.getters.getServerUrl}/posts/${this.id}/comments`
 	  ).then(response => response.json());
 
     },
-    newComment(){
+    newComment(){                                           
+    /* toDo ?? */
       this.commentName = "";
       this.commentBody = "";
       this.isVisableForm = !this.isVisableForm;
+    },
+    async deletePost(){                     //delete post and redirect Home
+      await fetch(`${this.$store.getters.getServerUrl}/posts/${this.id}`,{
+        method: 'DELETE',
+      })
+      .then( () => this.$router.push({ name : "Home" }));
     },
     goToEdit(id) {
       this.$router.push({ name : "EditPost" , params : {id:id}})

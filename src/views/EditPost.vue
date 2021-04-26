@@ -23,6 +23,8 @@ export default {
     id: Number                      //simple validation
   },
   data() {
+  // title and body related to the form
+  // user default 
     return {
 	  title:"",
       body:"",
@@ -34,14 +36,14 @@ export default {
     this.loadPost()
   },
   methods: {
-    async loadPost() {
-	  this.post = await fetch(
+    async loadPost() {                                  //load post and bind with form
+	  this.post = await fetch(                          
 	  `${this.$store.getters.getServerUrl}/posts/${this.id}`
 	  ).then(response => response.json());
       this.title = this.post.title;
       this.body = this.post.body;
     },
-    async EditPost(){
+    async EditPost(){                                   // edit and redirect
       await fetch(`${this.$store.getters.getServerUrl}/posts/${this.id}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -54,8 +56,7 @@ export default {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
+      .then( () => this.$router.push({ name : "Home" }));
     }
   }
 }
